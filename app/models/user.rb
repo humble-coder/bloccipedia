@@ -1,4 +1,4 @@
 class User < ActiveRecord::Base
   # attr_accessible :title, :body
-  has_many :wikis
+  has_and_belongs_to_many :wikis
 end
