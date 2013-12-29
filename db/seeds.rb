@@ -8,4 +8,4 @@
 require 'faker'
 
 rand(10..30).times do
-  u = User.create()
+  u = Wiki.create(title: Faker::)
