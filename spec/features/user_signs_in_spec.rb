@@ -1,11 +1,11 @@
-# require 'spec_helper'
+require 'spec_helper'
 
-# feature 'User signs in' do
-#   scenario 'with username, valid email, and password' do
-#     sign_in_with 'markb', 'valid@example.com', 'password'
+feature 'User signs in' do
+  scenario 'with username, valid email, and password' do
+    sign_in_with 'markb', 'valid@example.com', 'password'
 
-#     expect(page).to have_content('Sign out')
-#   end
+    expect(page).to have_content('Sign out')
+  end
 
 #   scenario 'with blank username' do
 #     sign_in_with '', 'valid@example.com', 'password'
