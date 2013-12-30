@@ -6,14 +6,6 @@
   <div><%= f.label :name %><br />
     <%= f.text_field :name %></div>
 
-  <div><%= f.label :account, "Account Type" %><br />
-    <%= f.label "Free" %>
-    <%= f.radio_button :account, "Free", id: "Free" %>
-    <%= f.label "Premium" %>
-    <%= f.radio_button :account, "Premium", id: "Premium" %>
-  </div>
-  <br>
-
   <div><%= f.label :email %><br />
   <%= f.email_field :email, :autofocus => true %></div>
 
