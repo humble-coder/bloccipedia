@@ -10,13 +10,16 @@ module Features
       click_button 'Sign up'
     end
 
-    # def sign_in
-    #   user = create(:user)
-    #   visit sign_in_path
-    #   fill_in 'Username', with: user.name
-    #   fill_in 'Email', with: user.email
-    #   fill_in 'Password', with: user.password
-    #   click_button 'Sign in'
-    # end
+    def sign_in_with(user_email, user_password)
+      user = create(:user)
+      visit new_user_session_path
+      fill_in 'Email', with: user_email
+      fill_in 'Password', with: user_password
+      click_button 'Sign in'
+    end
+
+    def sign_out
+      click_link('Sign out')
+    end
   end
 end
