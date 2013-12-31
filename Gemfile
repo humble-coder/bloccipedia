@@ -40,6 +40,7 @@ gem 'jquery-rails'
 gem 'newrelic_rpm'
 gem 'faker'
 gem 'devise'
+gem 'redcarpet'
 
 
 # To use ActiveModel has_secure_password
