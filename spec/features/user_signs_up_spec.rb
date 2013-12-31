@@ -17,7 +17,7 @@ feature 'User signs up' do
   end
 
   scenario 'with mismatching passwords' do
-    sign_up_with 'markb', 'valid@example.com', 'password', 'passwurd'
+    sign_up_with 'markb', 'valid@example.com', 'password', 'wrong_password'
     expect(page).to have_content("Password doesn't match confirmation")
   end
 
