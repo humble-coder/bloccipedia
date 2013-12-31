@@ -4,6 +4,7 @@ class WikisController < ApplicationController
   end
 
   def show
+    @wiki = Wiki.find(params[:id])
   end
 
   def new
@@ -22,5 +23,17 @@ class WikisController < ApplicationController
   end
 
   def edit
+    @wiki = Wiki.find(params[:id])
+  end
+
+  def update
+    @wiki = Wiki.find(params[:id])
+    if @wiki.update_attributes(params[:wiki])
+      flash[:notice] = "Wiki was updated."
+      redirect_to @wiki
+    else
+      flash[:error] = "There was an error saving your wiki. Please try again."
+      render :edit
+    end
   end
 end
