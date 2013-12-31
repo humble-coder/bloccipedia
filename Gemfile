@@ -41,6 +41,7 @@ gem 'newrelic_rpm'
 gem 'faker'
 gem 'devise'
 gem 'redcarpet'
+gem 'pundit'
 
 
 # To use ActiveModel has_secure_password
