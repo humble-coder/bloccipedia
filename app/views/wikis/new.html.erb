@@ -1,2 +1,12 @@
-<h1>Wikis#new</h1>
-<p>Find me in app/views/wikis/new.html.erb</p>
+<h1>New Wiki</h1>
+<% if current_user %>
+  <%= form_for @wiki do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+
+    <%= f.submit "Make Wiki" %>
+  <% end %>
+<% end %>

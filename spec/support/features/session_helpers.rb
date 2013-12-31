@@ -22,16 +22,12 @@ module Features
       click_link 'Sign out'
     end
 
-    def make_wiki(wiki_type)
+    def make_wiki
       sign_in_with("valid@example.com", "password")
       visit new_wiki_path
-      click_button 'Make Public Wiki'
       fill_in 'Title', with: 'Some Wiki'
       fill_in 'Body', with: 'Wiki content'
-      click_button 'Save Wiki'
-
-    end
-
+      click_button 'Make Wiki'
     end
   end
 end
