@@ -13,6 +13,7 @@ class WikisController < ApplicationController
 
   def create
     @wiki = Wiki.new(params[:wiki])
+    authorize @wiki
     if @wiki.save
       flash[:notice] = "Wiki saved successfully"
       redirect_to @wiki

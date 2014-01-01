@@ -22,11 +22,26 @@ module Features
       click_link 'Sign out'
     end
 
-    def make_wiki(title, body)
+    def make_wiki_as_signed_in_user(title, body)
       visit new_wiki_path
       fill_in 'Title', with: title
       fill_in 'Body', with: body
       click_button 'Make Wiki'
+    end
+
+    def make_wiki
+      create(:wiki)
+    end
+
+    def check_out_wikis
+      make_wiki
+      visit wikis_path
+    end
+
+    def click_on_a_wiki
+      make_wiki
+      visit wikis_path
+      click_link 'My Wiki'
     end
   end
 end
