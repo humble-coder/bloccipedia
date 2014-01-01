@@ -9,4 +9,24 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   has_many :wikis
   validates :name, presence: true
+  before_create :set_user
+
+  def has_free_account?
+    self.role == 'Free'
+  end
+
+  def has_premium_account?
+    self.role == 'Premium'
+  end
+
+  private
+  
+  def set_user
+    self.role = 'Free'
+  end
+
+  def upgrade_user
+    self.role = 'Premium'
+  end
+
 end

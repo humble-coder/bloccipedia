@@ -2,9 +2,9 @@ require 'spec_helper'
 
 # In order to publish the documentation on my project
 # As a project manager
-# I need to create wikis
+# I need to create wikis that other employees can access.
 
-feature 'User creates wiki' do
+feature 'New user with free account creates a public wiki' do
   scenario 'by signing in and making a wiki' do
     sign_in_with("valid@example.com", "password")
     make_wiki("Some Wiki", "Some Content")

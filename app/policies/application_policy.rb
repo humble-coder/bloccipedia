@@ -2,8 +2,8 @@ class ApplicationPolicy
   attr_reader :user, :wiki
 
   def initialize(user, wiki)
-    @user = user
-    @record = wiki
+    @user = user || User.new # guest user
+    @wiki = wiki
   end
 
   def index?
@@ -15,7 +15,7 @@ class ApplicationPolicy
   end
 
   def create?
-    false
+    @user.has_free_account? || @user.has_premium_account?
   end
 
   def new?
@@ -31,7 +31,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false
+    wiki.user_id == user.id
   end
 
   def scope
