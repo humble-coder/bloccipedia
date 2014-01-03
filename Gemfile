@@ -20,6 +20,7 @@ group :development, :test do
   gem 'capybara'
   gem 'cucumber-rails', :require => false
   gem 'launchy'
+  gem 'selenium-webdriver'
 end
 
 
@@ -42,6 +43,8 @@ gem 'faker'
 gem 'devise'
 gem 'redcarpet'
 gem 'pundit'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+
 
 
 # To use ActiveModel has_secure_password

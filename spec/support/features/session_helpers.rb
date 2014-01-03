@@ -11,7 +11,7 @@ module Features
     end
 
     def sign_in_with(user_email, user_password)
-      user = create(:user)
+      create(:user)
       visit new_user_session_path
       fill_in 'Email', with: user_email
       fill_in 'Password', with: user_password
@@ -43,5 +43,39 @@ module Features
       visit wikis_path
       click_link 'My Wiki'
     end
+
+    def login_to_upgrade_account
+      user = create(:user)
+      visit new_charge_path
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+      click_button 'Sign in'
+      click_button 'Pay with Card'
+    end
+
+    def fill_payment_form
+      fill_in 'Email', with: 'valid@example.com'
+      fill_in 'Card number', with: '4242424242424242'
+      fill_in 'CVC', with: '123'
+      fill_in 'MM / YY', with: '1015'
+      click_button 'Pay $5.00'
+    end
+
+    def sign_in_as_premium_user
+      create(:user, :as_premium_user)
+      visit new_user_session_path
+      fill_in 'Email', with: "valid@example.com"
+      fill_in 'Password', with: "password"
+      click_button 'Sign in'
+    end
+
+    def make_private_wiki_as_premium_user
+      visit new_wiki_path
+      fill_in 'Title', with: 'My Private Wiki'
+      fill_in 'Body', with: 'Some private content'
+      check 'public'
+      click_button 'Make Wiki'
+    end
+
   end
 end

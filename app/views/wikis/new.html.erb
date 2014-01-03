@@ -7,7 +7,12 @@
     <%= f.label :body %>
     <%= f.text_area :body %>
 
-    <%= f.submit "Make Wiki" %>
+    <% if current_user.role == 'Premium' %>
+      <%= f.label 'Make Private' %>
+      <%= f.check_box :public, checked_value = '0', unchecked_value = '1' %>
+    <% end %>
+
+    <%= f.submit 'Make Wiki' %>
   <% end %>
 <% else %>
   <p>You must be signed in to make a wiki.</p>

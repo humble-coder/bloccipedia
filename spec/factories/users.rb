@@ -7,5 +7,9 @@ FactoryGirl.define do
     password "password"
     confirmed_at Time.now
     role "Free"
+
+    trait :as_premium_user do
+      role "Premium"
+    end
   end
 end

@@ -23,7 +23,7 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+    @wiki.user_id == @user.id
   end
 
   def edit?

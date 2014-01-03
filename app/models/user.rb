@@ -25,8 +25,4 @@ class User < ActiveRecord::Base
     self.role = 'Free'
   end
 
-  def upgrade_user
-    self.role = 'Premium'
-  end
-
 end
