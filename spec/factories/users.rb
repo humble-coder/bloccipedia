@@ -6,10 +6,10 @@ FactoryGirl.define do
     email "valid@example.com"
     password "password"
     confirmed_at Time.now
-    role "Free"
 
     trait :as_premium_user do
       role "Premium"
+      email "premium_user@example.com"
     end
   end
 end

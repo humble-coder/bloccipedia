@@ -8,8 +8,10 @@
     <%= f.text_area :body %>
 
     <% if current_user.role == 'Premium' %>
-      <%= f.label 'Make Private' %>
-      <%= f.check_box :public, checked_value = '0', unchecked_value = '1' %>
+      <%= f.label 'Make Public' %>
+      <%= f.check_box :public, { checked: true }, 1, 0 %>
+    <% else %>
+      <% @wiki.public = true %>
     <% end %>
 
     <%= f.submit 'Make Wiki' %>

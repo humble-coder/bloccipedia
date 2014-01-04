@@ -29,8 +29,8 @@ module Features
       click_button 'Make Wiki'
     end
 
-    def make_wiki
-      create(:wiki)
+    def make_wiki(public = true)
+      public ? create(:wiki) : create(:wiki, :as_private)
     end
 
     def check_out_wikis
@@ -61,19 +61,27 @@ module Features
       click_button 'Pay $5.00'
     end
 
-    def sign_in_as_premium_user
-      create(:user, :as_premium_user)
+
+    def premium_user_signs_in
+      user = create(:user, :as_premium_user)
       visit new_user_session_path
-      fill_in 'Email', with: "valid@example.com"
-      fill_in 'Password', with: "password"
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
       click_button 'Sign in'
     end
 
-    def make_private_wiki_as_premium_user
+    def make_private_wiki_as_user
       visit new_wiki_path
       fill_in 'Title', with: 'My Private Wiki'
       fill_in 'Body', with: 'Some private content'
-      check 'public'
+      uncheck 'wiki_public'
+      click_button 'Make Wiki'
+    end
+
+    def make_public_wiki_as_user
+      visit new_wiki_path
+      fill_in 'Title', with: 'My Public Wiki'
+      fill_in 'Body', with: 'Some public content'
       click_button 'Make Wiki'
     end
 

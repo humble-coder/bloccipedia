@@ -7,6 +7,7 @@ feature 'User with free account', :js => true do
     Capybara.within_frame 'stripe_checkout_app' do
       fill_payment_form
     end
+    
     expect(page).to have_content('Thanks')
   end
 end
