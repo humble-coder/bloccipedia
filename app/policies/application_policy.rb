@@ -11,7 +11,8 @@ class ApplicationPolicy
   end
 
   def show?
-    scope.where(:id => wiki.id).exists?
+    #scope.where(:id => wiki.id).exists?
+    @wiki.public || @wiki.user_id == @user.id
   end
 
   def create?
@@ -31,7 +32,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    wiki.user_id == user.id
+    @wiki.user_id == @user.id
   end
 
   def scope
