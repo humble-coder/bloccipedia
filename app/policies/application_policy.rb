@@ -1,9 +1,9 @@
 class ApplicationPolicy
-  attr_reader :user, :wiki
+  attr_reader :user, :record
 
-  def initialize(user, wiki)
-    @user = user || User.new # guest user
-    @wiki = wiki
+  def initialize(user, record)
+    @user = user
+    @record = record
   end
 
   def index?
@@ -11,28 +11,7 @@ class ApplicationPolicy
   end
 
   def show?
-    #scope.where(:id => wiki.id).exists?
-    @wiki.public || @wiki.user_id == @user.id
-  end
-
-  def create?
-    @user.has_free_account? || @user.has_premium_account?
-  end
-
-  def new?
-    create?
-  end
-
-  def update?
-    @wiki.user_id == @user.id
-  end
-
-  def edit?
-    update?
-  end
-
-  def destroy?
-    @wiki.user_id == @user.id
+    scope.where(:id => record.id).exists?
   end
 
   def scope

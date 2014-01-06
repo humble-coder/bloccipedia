@@ -8,7 +8,8 @@ FactoryGirl.define do
     confirmed_at Time.now
 
     trait :as_premium_user do
-      role "Premium"
+      name "johnb"
+      premium true
       email "premium_user@example.com"
     end
   end

@@ -13,4 +13,11 @@ feature 'Premium user signs in and' do
 
     expect(page).to have_content('My Public Wiki')
   end
+  scenario 'makes a private wiki with a collaborator' do
+    create(:user)
+    premium_user_signs_in
+    make_private_wiki_as_user('markb')
+
+    expect(page).to have_content('markb')
+  end
 end

@@ -70,11 +70,12 @@ module Features
       click_button 'Sign in'
     end
 
-    def make_private_wiki_as_user
+    def make_private_wiki_as_user(collaborator = nil)
       visit new_wiki_path
       fill_in 'Title', with: 'My Private Wiki'
       fill_in 'Body', with: 'Some private content'
       uncheck 'wiki_public'
+      select collaborator, from: "wiki[user_ids]" if collaborator
       click_button 'Make Wiki'
     end
 
@@ -84,6 +85,5 @@ module Features
       fill_in 'Body', with: 'Some public content'
       click_button 'Make Wiki'
     end
-
   end
 end

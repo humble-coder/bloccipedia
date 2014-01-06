@@ -1,1 +1,4 @@
 <h2>Thanks, you paid <strong>$5.00</strong>!</h2>
+<% if current_user.premium %>
+  <h2>You are now a premium user!</h2>
+<% end %>

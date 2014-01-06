@@ -3,7 +3,7 @@ require 'spec_helper'
 feature 'New User signs up' do
   scenario 'with name, valid email, and password' do
     sign_up_with 'markb', 'valid@example.com', 'password', 'password'
-    expect(page).to have_content('confirmation link')
+    expect(page).to have_content("confirmation link")
   end
 
   scenario 'with blank username' do

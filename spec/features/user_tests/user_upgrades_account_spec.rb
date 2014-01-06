@@ -8,6 +8,6 @@ feature 'User with free account', :js => true do
       fill_payment_form
     end
     
-    expect(page).to have_content('Thanks')
+    expect(page).to have_content('You are now a premium user!')
   end
 end

@@ -1,2 +1,8 @@
 <h1><%= markdown @wiki.title %></h1>
 <p><%= markdown @wiki.body %></p>
+<% if @wiki.users.include?(current_user) %>
+  <h3>Collaborators</h3>
+  <% @wiki.users.each do |user| %>
+    <p><%= user.name %></p>
+  <% end %>
+<% end %>

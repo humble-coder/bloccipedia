@@ -1,4 +1,6 @@
 class WikisController < ApplicationController
+  before_filter :authenticate_user!, except: [:index, :show]
+  
   def index
     @wikis = policy_scope(Wiki)
   end
@@ -15,6 +17,7 @@ class WikisController < ApplicationController
   def create
     #@wiki = Wiki.new(params[:wiki])
     @wiki = current_user.wikis.build(params[:wiki])
+    @wiki.users << current_user
     authorize @wiki
     if @wiki.save
       flash[:notice] = "Wiki saved successfully"

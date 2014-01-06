@@ -7,9 +7,11 @@
     <%= f.label :body %>
     <%= f.text_area :body %>
 
-    <% if current_user.role == 'Premium' %>
+    <% if current_user.premium %>
       <%= f.label 'Make Public' %>
       <%= f.check_box :public, { checked: true }, 1, 0 %>
+      <%= f.label 'Select Collaborators' %>
+      <%= f.collection_select(:user_ids, User.all, :id, :name, { prompt: true, multiple: true }) %>
     <% else %>
       <% @wiki.public = true %>
     <% end %>

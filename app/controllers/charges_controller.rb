@@ -20,7 +20,7 @@ class ChargesController < ApplicationController
       :currency    => 'usd'
     )
 
-    current_user.update_attribute(:role, "Premium")
+    current_user.update_attribute(:premium, true)
 
   rescue Stripe::CardError => e
     logger.info e.message
