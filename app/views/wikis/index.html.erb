@@ -1,5 +1,7 @@
 <h1>Wikis</h1>
 <% @wikis.each do |wiki| %>
-<p><%= link_to wiki.title, wiki_path(wiki) %></p>
+  <% if wiki.public || wiki.users.include?(current_user) %>
+    <p><%= link_to wiki.title, wiki_path(wiki) %></p>
+  <% end %>
 <% end %>
 

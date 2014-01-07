@@ -1,11 +1,17 @@
 class WikiPolicy < ApplicationPolicy
+  attr_reader :user, :wiki
+
+  def initialize(user, wiki)
+    @user = user
+    @wiki = wiki
+  end
 
   def show?
-    record.users.include?(user) || record.public
+    wiki.users.include?(user) || wiki.public
   end
 
   def create?
-    user
+    user.confirmed_at
   end
 
   def new?
@@ -13,7 +19,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def update?
-    record.users.include?(user)
+    wiki.users.include?(user)
   end
 
   def edit?
@@ -21,12 +27,16 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.records.include?(record)
+    user.wikis.include?(wiki)
+  end
+
+  def scope
+    Pundit.policy_scope!(user, Wiki)
   end
 
   class Scope < Struct.new(:user, :scope)
     def resolve
-      if user
+      if user && user.confirmed_at
         scope.all
       else
         scope.where(public: true)

@@ -1,28 +1,28 @@
 require 'spec_helper'
 
-feature 'User signs in' do
+feature 'Free User signs in' do
   scenario 'with correct email and correct password' do
-    sign_in_with 'valid@example.com', 'password'
+    free_user_signs_in
     expect(page).to have_content('Signed in successfully')
   end
 
   scenario 'with blank password' do
-    sign_in_with 'valid@example.com', ''
+    free_user_signs_in(password = false)
     expect(page).to have_content('Invalid email or password')
   end
 
   scenario 'with wrong password' do
-    sign_in_with 'valid@example.com', 'wrong_password'
+    free_user_signs_in(password = false, wrong_password = true)
     expect(page).to have_content('Invalid email or password')
   end
 
   scenario 'with blank email' do
-    sign_in_with '', 'password'
+    free_user_signs_in(email = false)
     expect(page).to have_content('Invalid email or password')
   end
 
-  scenario 'with invalid email' do
-    sign_in_with 'invalid_email', 'password'
+  scenario 'with wrong email' do
+    free_user_signs_in(email = false, wrong_email = true)
     expect(page).to have_content('Invalid email or password')
   end
 end
