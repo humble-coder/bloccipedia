@@ -31,10 +31,12 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def update
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
     if @wiki.update_attributes(params[:wiki])
       flash[:notice] = "Wiki was updated."
       redirect_to @wiki
@@ -43,4 +45,12 @@ class WikisController < ApplicationController
       render :edit
     end
   end
+
+  # def destroy
+  #   @wiki = Wiki.find(params[:wiki_id])
+  #   @user = User.find(params[:id])
+  #   @wiki.users.delete(@user)
+
+  #   flash[:notice] = "Collaborator removed."
+  # end
 end

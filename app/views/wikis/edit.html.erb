@@ -1,2 +1,28 @@
-<h1>Wikis#edit</h1>
-<p>Find me in app/views/wikis/edit.html.erb</p>
+<h1>Edit Wiki</h1>
+<% if current_user %>
+  <%= form_for @wiki do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+
+    <% if current_user.premium && current_user.wikis.include?(@wiki) %>
+      <%= f.label 'Make Public' %>
+      <%= f.check_box :public, { checked: true }, 1, 0 %>
+      <%= f.label 'Add Collaborators' %>
+      <%= f.collection_select(:user_ids, User.all, :id, :name, { prompt: true, multiple: true }) %>
+    <% else %>
+      <% @wiki.public = true %>
+    <% end %>
+    <%= f.submit 'Update Wiki' %>
+  <% end %>
+<% end %>
+
+
+<%# @wiki.users.each do |user| %>
+           <%#= link_to user.name, wiki_user_path(@wiki, user), method: :destroy %>
+       <%# end %>
+
+<%#= f.label 'Remove Collaborators' %>
+      <%#= f.collection_select(:user_ids, @wiki.users, :destroy, :name, { prompt: true, multiple: true }) %>

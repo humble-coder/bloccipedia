@@ -11,7 +11,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def create?
-    user.confirmed_at
+    user.present?
   end
 
   def new?
@@ -34,9 +34,10 @@ class WikiPolicy < ApplicationPolicy
     Pundit.policy_scope!(user, Wiki)
   end
 
+
   class Scope < Struct.new(:user, :scope)
     def resolve
-      if user && user.confirmed_at
+      if user.present?
         scope.all
       else
         scope.where(public: true)
