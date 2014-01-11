@@ -1,4 +1,5 @@
 <h1>Edit Wiki</h1>
+
 <% if current_user %>
   <%= form_for @wiki do |f| %>
     <%= f.label :title %>
@@ -18,11 +19,3 @@
     <%= f.submit 'Update Wiki' %>
   <% end %>
 <% end %>
-
-
-<%# @wiki.users.each do |user| %>
-           <%#= link_to user.name, wiki_user_path(@wiki, user), method: :destroy %>
-       <%# end %>
-
-<%#= f.label 'Remove Collaborators' %>
-      <%#= f.collection_select(:user_ids, @wiki.users, :destroy, :name, { prompt: true, multiple: true }) %>

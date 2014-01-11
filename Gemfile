@@ -45,6 +45,8 @@ gem 'redcarpet'
 gem 'pundit'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'friendly_id'
+gem 'epic-editor-rails'
+
 
 
 

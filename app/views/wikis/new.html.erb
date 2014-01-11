@@ -1,11 +1,13 @@
 <h1>New Wiki</h1>
+
 <% if current_user %>
+  
   <%= form_for @wiki do |f| %>
     <%= f.label :title %>
     <%= f.text_field :title %>
 
-    <%= f.label :body %>
-    <%= f.text_area :body %>
+      <%= f.label :body %>
+      <%= f.text_area :body %>
 
     <% if current_user.premium %>
       <%= f.label 'Make Public' %>
@@ -18,6 +20,7 @@
 
     <%= f.submit 'Make Wiki' %>
   <% end %>
+
 <% else %>
   <p>You must be signed in to make a wiki.</p>
 <% end %>

@@ -45,12 +45,4 @@ class WikisController < ApplicationController
       render :edit
     end
   end
-
-  # def destroy
-  #   @wiki = Wiki.find(params[:wiki_id])
-  #   @user = User.find(params[:id])
-  #   @wiki.users.delete(@user)
-
-  #   flash[:notice] = "Collaborator removed."
-  # end
 end
