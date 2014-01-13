@@ -8,6 +8,8 @@ require 'capybara/rails'
 require 'pundit/rspec'
 
 
+
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
@@ -48,6 +50,8 @@ RSpec.configure do |config|
 
   config.include Features::SessionHelpers, type: :feature
   config.include FactoryGirl::Syntax::Methods
+  config.include Warden::Test::Helpers
+
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
@@ -55,10 +59,13 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.start
+    Warden.test_mode!
   end
 
   config.after(:each) do
     DatabaseCleaner.clean
+    Warden.test_reset!
   end
+
 
 end

@@ -6,10 +6,8 @@
     <%= f.label :title %>
     <%= f.text_field :title %>
 
-      <%= f.label :body %>
-      <div id="epiceditor">
-        <%= f.text_area :body %>
-      </div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
 
 
     <% if current_user.premium %>
@@ -17,8 +15,6 @@
       <%= f.check_box :public, { checked: true }, 1, 0 %>
       <%= f.label 'Select Collaborators' %>
       <%= f.collection_select(:user_ids, User.all, :id, :name, { prompt: true, multiple: true }) %>
-    <% else %>
-      <% @wiki.public = true %>
     <% end %>
 
     <%= f.submit 'Make Wiki' %>

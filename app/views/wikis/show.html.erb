@@ -1,18 +1,19 @@
 <h1><%= markdown @wiki.title %></h1>
-<br>
-<% if !@wiki.public%> 
+<% if !@wiki.public %> 
 	(Private)
 <% end %>
 <p><%= markdown @wiki.body %></p>
 
 <% if @wiki.users.include?(current_user) %>
   <%= link_to "Edit Wiki", edit_wiki_path(@wiki), class: "button" %>
-  <h3>Collaborators</h3>
-  <% @wiki.users.each do |user| %>
-    <p><%= user.name %> 
-    <% if current_user.wikis.include?(@wiki) && current_user.premium %>
-      <%= link_to "Remove " + user.name, wiki_user_path(@wiki, user), method: :delete, class: "button" %>
-    </p>
+  <% if current_user.premium %>
+    <h3>Collaborators</h3>
+    <% @wiki.users.each do |user| %>
+      <p><%= user.name %> 
+      <% if current_user.wikis.include?(@wiki) %>
+        <%= link_to "Remove " + user.name, wiki_user_path(@wiki, user), method: :delete, class: "button" %>
+      </p>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

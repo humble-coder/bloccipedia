@@ -10,7 +10,7 @@ module Features
       click_button 'Sign up'
     end
 
-    def free_user_signs_in(email = true, password = true, wrong_password = false, bad_email = false)
+    def member_user_signs_in(email = true, password = true, wrong_password = false, bad_email = false)
       user = create(:user)
       visit new_user_session_path
       fill_in 'Email', with: user.email if email

@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :wiki do
-    title "My Wiki"
+    title "My Public Wiki"
     body "Some content"
     public true
 

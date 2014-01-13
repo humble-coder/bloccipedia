@@ -8,9 +8,9 @@
   </head>
   <body>
 
+    <%= link_to "View Wikis", wikis_path, class: "button" %>
     <% if current_user %>
       Hello <%= current_user.name %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-      <%= link_to "View Wikis", wikis_path, class: "button" %>
       <%= link_to "Create a Wiki", new_wiki_path, class: "button" %>
       <% if !current_user.premium %>
         <%= link_to "Upgrade to Premium", new_charge_path, class: "button" %>
