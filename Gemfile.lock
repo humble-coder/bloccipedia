@@ -76,8 +76,6 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
-    epic-editor-rails (0.2.0)
-      railties (>= 3.2, < 5.0)
     erubis (2.7.0)
     execjs (2.0.2)
     factory_girl (4.3.0)
@@ -199,7 +197,6 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   devise
-  epic-editor-rails
   factory_girl_rails (~> 4.0)
   faker
   friendly_id

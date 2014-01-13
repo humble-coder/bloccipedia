@@ -6,7 +6,9 @@
     <%= f.text_field :title %>
 
     <%= f.label :body %>
-    <%= f.text_area :body %>
+    <div id="epiceditor">
+      <%= f.text_area :body %>
+    </div>
 
     <% if current_user.premium && current_user.wikis.include?(@wiki) %>
       <%= f.label 'Make Public' %>

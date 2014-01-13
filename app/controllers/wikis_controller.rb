@@ -16,7 +16,6 @@ class WikisController < ApplicationController
   end
 
   def create
-    #@wiki = Wiki.new(params[:wiki])
     @wiki = current_user.wikis.build(params[:wiki])
     @wiki.users << current_user
     authorize @wiki
