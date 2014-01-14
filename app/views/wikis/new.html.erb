@@ -1,20 +1,27 @@
 <h1>New Wiki</h1>
 
 <% if current_user %>
-  
   <%= form_for @wiki do |f| %>
+
+    <% if @wiki.errors.any? %>
+      <ul>
+      <% @wiki.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    <% end %>
+
     <%= f.label :title %>
     <%= f.text_field :title %>
 
     <%= f.label :body %>
     <%= f.text_area :body %>
 
-
     <% if current_user.premium %>
       <%= f.label 'Make Public' %>
       <%= f.check_box :public, { checked: true }, 1, 0 %>
       <%= f.label 'Select Collaborators' %>
-      <%= f.collection_select(:user_ids, User.all, :id, :name, { prompt: true, multiple: true }) %>
+      <%= f.collection_check_boxes(:user_ids, User.where("id != ?", current_user.id), :id, :name) %>
     <% end %>
 
     <%= f.submit 'Make Wiki' %>

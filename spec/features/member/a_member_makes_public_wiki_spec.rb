@@ -23,7 +23,7 @@ feature 'A member makes a public wiki' do
     fill_in 'Body', with: 'My public content'
     click_button 'Make Wiki'
 
-    expect(page).to have_content('Your wiki needs a title!')
+    expect(page).to have_content("Title can't be blank")
   end
 
   scenario 'without a body' do
@@ -32,7 +32,7 @@ feature 'A member makes a public wiki' do
     fill_in 'Body', with: ''
     click_button 'Make Wiki'
 
-    expect(page).to have_content('Your wiki needs a body!')
+    expect(page).to have_content("Body can't be blank")
   end
 
   scenario 'without a body or a title' do
@@ -41,7 +41,8 @@ feature 'A member makes a public wiki' do
     fill_in 'Body', with: ''
     click_button 'Make Wiki'
 
-    expect(page).to have_content('Your wiki needs a title and a body!')
+    expect(page).to have_content("Title can't be blank") 
+    expect(page).to have_content("Body can't be blank")
   end
 
 

@@ -66,11 +66,11 @@ module Features
     end
 
     def make_private_wiki(collaborator = nil)
-      visit new_wiki_path
+      click_link 'Create a Wiki'
       fill_in 'Title', with: 'My Private Wiki'
       fill_in 'Body', with: 'Some private content'
       uncheck 'wiki_public'
-      select collaborator, from: "wiki[user_ids]" if collaborator
+      select collaborator.name, from: "wiki[user_ids]" if collaborator
       click_button 'Make Wiki'
     end
 

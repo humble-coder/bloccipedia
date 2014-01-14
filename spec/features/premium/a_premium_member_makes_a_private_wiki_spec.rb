@@ -25,7 +25,7 @@ feature 'A premium member makes a private wiki' do
     fill_in 'Title', with: 'My Private Wiki'
     fill_in 'Body', with: 'Some private content'
     uncheck 'wiki_public'
-    select collaborator.name, from: 'wiki[user_ids]'
+    check collaborator.name
     click_button 'Make Wiki'
 
     expect(page).to have_content('My Private Wiki')

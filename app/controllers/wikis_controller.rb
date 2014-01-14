@@ -24,19 +24,8 @@ class WikisController < ApplicationController
       flash[:notice] = "Wiki saved successfully"
       redirect_to @wiki
     else
-      if @wiki.title.empty? && @wiki.body.empty?
-        flash[:error] = "Your wiki needs a title and a body!"
-        render :new
-      elsif @wiki.title.empty?
-        flash[:error] = "Your wiki needs a title!"
-        render :new
-      elsif @wiki.body.empty?
-        flash[:error] = "Your wiki needs a body!"
-        render :new
-      else
-        flash[:error] = "There was an error saving your wiki. Please try again."
-        render :new
-      end
+      flash[:error] = "There was an error saving your wiki. Please try again."
+      render :new
     end
   end
 
@@ -52,19 +41,8 @@ class WikisController < ApplicationController
       flash[:notice] = "Wiki was updated."
       redirect_to @wiki
     else
-      if @wiki.title.empty? && @wiki.body.empty?
-        flash[:error] = "The wiki needs a title and a body!"
-        render :edit
-      elsif @wiki.title.empty?
-        flash[:error] = "The wiki needs a title!"
-        render :edit
-      elsif @wiki.body.empty?
-        flash[:error] = "The wiki needs a body!"
-        render :edit
-      else
-        flash[:error] = "There was an error saving your wiki. Please try again."
-        render :edit
-      end
+      flash[:error] = "There was an error saving your wiki. Please try again."
+      render :edit
     end
   end
 end

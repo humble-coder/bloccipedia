@@ -1,4 +1,4 @@
-if Rails.env.test? 
+if Rails.env.test?
   ENV['PUBLISHABLE_KEY'] = 'pk_test_s6clxTJCTWHAPbZEU8kMhnF5'
   ENV['SECRET_KEY'] = 'sk_test_27FkHUMJuMyQIaOZd2IIgt1o'
 end
