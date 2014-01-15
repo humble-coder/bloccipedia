@@ -7,6 +7,8 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find(params[:id])
+    @current_collaborators = @wiki.users
+    @new_collaborators = User.where("id != (?)", current_user.id).select { |collaborator| !@wiki.users.include?(collaborator) }
     authorize @wiki
   end
 
@@ -17,9 +19,10 @@ class WikisController < ApplicationController
 
   def create
     @wiki = current_user.wikis.build(params[:wiki])
-    @wiki.users << current_user
+    @wiki.users << current_user if !@wiki.users.include?(current_user)
     @wiki.public = true if !current_user.premium
     authorize @wiki
+
     if @wiki.save
       flash[:notice] = "Wiki saved successfully"
       redirect_to @wiki
@@ -37,12 +40,27 @@ class WikisController < ApplicationController
   def update
     @wiki = Wiki.find(params[:id])
     authorize @wiki
+
     if @wiki.update_attributes(params[:wiki])
       flash[:notice] = "Wiki was updated."
       redirect_to @wiki
     else
       flash[:error] = "There was an error saving your wiki. Please try again."
       render :edit
+    end
+  end
+
+  def destroy
+    @wiki = Wiki.find(params[:id])
+    title = @wiki.title
+    authorize @wiki
+
+    if @wiki.destroy
+      flash[:notice] = "'#{title}' was deleted successfully."
+      redirect_to wikis_path
+    else
+      flash[:error] = "There was an error deleting the wiki."
+      render :show
     end
   end
 end

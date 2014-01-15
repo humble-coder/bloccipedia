@@ -20,13 +20,9 @@
     <% if current_user.premium %>
       <%= f.label 'Make Public' %>
       <%= f.check_box :public, { checked: true }, 1, 0 %>
-      <%= f.label 'Select Collaborators' %>
-      <%= f.collection_check_boxes(:user_ids, User.where("id != ?", current_user.id), :id, :name) %>
     <% end %>
-
     <%= f.submit 'Make Wiki' %>
   <% end %>
-
 <% else %>
   <p>You must be signed in to make a wiki.</p>
 <% end %>

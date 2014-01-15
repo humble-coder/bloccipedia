@@ -15,8 +15,8 @@ feature 'A premium member removes collaborator from own wiki' do
   scenario 'Successfully' do
   	click_link 'View Wikis'
   	click_link 'My Private Wiki'
-  	click_link 'Remove markb'
+  	click_link 'Remove'
 
-  	expect(page).not_to have_content('markb')
+  	expect(page).to have_content('Collaborator markb Removed')
   end
 end

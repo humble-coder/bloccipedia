@@ -5,7 +5,7 @@ Bloccipedia::Application.routes.draw do
   devise_for :users
 
   resources :wikis do
-  	resources :users, only: [:destroy]
+  	resources :users, only: [:destroy, :update]
   end
 
   root to: 'welcome#index'

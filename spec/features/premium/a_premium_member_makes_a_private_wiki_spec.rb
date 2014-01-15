@@ -14,23 +14,22 @@ feature 'A premium member makes a private wiki' do
     fill_in 'Body', with: 'Some private content'
     uncheck 'wiki_public'
     click_button 'Make Wiki'
-
+    
     expect(page).to have_content('My Private Wiki')
     expect(page).to have_content('Some private content')
   end
 
   scenario 'Successfully with a collaborator' do
     collaborator = create(:user)
-    visit new_wiki_path # to reload page so that collaborator, a user, is available in the options of the 'wiki[user_ids]' collection select
+    visit new_wiki_path # to reload page so that collaborator, a user, shows up as a collaborator to add.
     fill_in 'Title', with: 'My Private Wiki'
     fill_in 'Body', with: 'Some private content'
-    uncheck 'wiki_public'
-    check collaborator.name
     click_button 'Make Wiki'
+    click_link 'Add'
 
     expect(page).to have_content('My Private Wiki')
     expect(page).to have_content('Some private content')
-    expect(page).to have_content('markb')
+    expect(page).to have_content('Collaborator markb Added')
   end
 
   scenario 'without a title' do
@@ -39,7 +38,7 @@ feature 'A premium member makes a private wiki' do
     uncheck 'wiki_public'
     click_button 'Make Wiki'
 
-    expect(page).to have_content('Your wiki needs a title!')
+    expect(page).to have_content("Title can't be blank")
   end
 
   scenario 'without a body' do
@@ -48,7 +47,7 @@ feature 'A premium member makes a private wiki' do
     uncheck 'wiki_public'
     click_button 'Make Wiki'
 
-    expect(page).to have_content('Your wiki needs a body!')
+    expect(page).to have_content("Body can't be blank")
   end
 
   scenario 'without either a title or a body' do
@@ -57,6 +56,7 @@ feature 'A premium member makes a private wiki' do
     uncheck 'wiki_public'
     click_button 'Make Wiki'
 
-    expect(page).to have_content('Your wiki needs a title and a body!')
+    expect(page).to have_content("Title can't be blank")
+    expect(page).to have_content("Body can't be blank")
   end
 end

@@ -6,14 +6,22 @@
 
 <% if @wiki.users.include?(current_user) %>
   <%= link_to "Edit Wiki", edit_wiki_path(@wiki), class: "button" %>
-  <% if current_user.premium %>
-    <h3>Collaborators</h3>
-    <% @wiki.users.each do |user| %>
-      <p><%= user.name %> 
-      <% if current_user.wikis.include?(@wiki) %>
-        <%= link_to "Remove " + user.name, wiki_user_path(@wiki, user), method: :delete, class: "button" %>
-      </p>
+  <h4>Current Collaborators</h4>
+  <% @current_collaborators.each do |collaborator| %>
+    <p> 
+      <%= collaborator.name %>
+      <% if current_user.is_wiki_owner?(@wiki) && current_user != collaborator %>
+        <%= link_to "Remove", wiki_user_path(@wiki, collaborator), method: :delete, class: "button" %>
       <% end %>
+    </p>
+  <% end %>
+  <% if current_user.is_wiki_owner?(@wiki) %>
+    <h4>Add New Collaborators</h4>
+    <% @new_collaborators.each do |collaborator| %>
+      <p><%= link_to "Add " + collaborator.name, wiki_user_path(@wiki, collaborator), method: :put, class: "button" %>
     <% end %>
+  <% end %>
+  <% if current_user.wikis.include?(@wiki) %>
+    <%= link_to "Delete Wiki", wiki_path(@wiki), method: :delete, class: "button" %>
   <% end %>
 <% end %>

@@ -11,6 +11,8 @@ FactoryGirl.define do
       name "johnb"
       premium true
       email "premium_user@example.com"
+      password "password"
+      confirmed_at Time.now
     end
   end
 end
