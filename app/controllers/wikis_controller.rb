@@ -23,7 +23,6 @@ class WikisController < ApplicationController
   def create
     @wiki = current_user.wikis.build(params[:wiki])
     @wiki.users << current_user if !@wiki.users.include?(current_user)
-    @wiki.public = true if !current_user.premium
     authorize @wiki
 
     if @wiki.save
