@@ -9,9 +9,13 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:id])
     @current_collaborators = @wiki.users
     if current_user
-      @new_collaborators = User.where("id != (?)", current_user.id) 
+      @new_collaborators = User.search(params[:search]).where("id != (?)", current_user.id)
       @new_collaborators.select! { |collaborator| !@wiki.users.include?(collaborator) }
     end
+    # if current_user
+    #   @new_collaborators = User.where("id != (?)", current_user.id) 
+    #   @new_collaborators.select! { |collaborator| !@wiki.users.include?(collaborator) }
+    # end
     authorize @wiki
   end
 

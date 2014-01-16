@@ -25,6 +25,8 @@ feature 'A premium member makes a private wiki' do
     fill_in 'Title', with: 'My Private Wiki'
     fill_in 'Body', with: 'Some private content'
     click_button 'Make Wiki'
+    fill_in 'search', with: 'markb'
+    click_button 'Search'
     click_link 'Add'
 
     expect(page).to have_content('My Private Wiki')

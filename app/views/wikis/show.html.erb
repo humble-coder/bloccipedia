@@ -19,9 +19,20 @@
     </p>
   <% end %>
   <% if current_user.is_wiki_owner?(@wiki) %>
-    <h4>Add New Collaborators</h4>
+    <h4>Search for and Add New Collaborators</h4>
+    <%= form_tag wiki_path(@wiki), method: :get do %>
+      <p>
+        <%= text_field_tag :search, params[:search] %>
+        <%= submit_tag "Search", name: nil %>
+      </p>
+    <% end %>
+    <% if @new_collaborators %>
       <% @new_collaborators.each do |collaborator| %>
-      <p><%= link_to "Add " + collaborator.name, wiki_user_path(@wiki, collaborator), method: :put, class: "button" %>
+      <p>
+        <%= collaborator.name %>
+        <%= link_to "Add", wiki_user_path(@wiki, collaborator), method: :put, class: "button" %>
+      </p>
       <% end %>
+    <% end %>
   <% end %>
 <% end %>

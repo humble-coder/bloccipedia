@@ -1,6 +1,6 @@
 class Wiki < ActiveRecord::Base
   has_and_belongs_to_many :users
-  attr_accessible :body, :title, :public, :user_ids
+  attr_accessible :body, :title, :public
   validates :title, presence: true
   validates :body, presence: true
   before_create :set_public_attribute
