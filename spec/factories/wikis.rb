@@ -4,7 +4,6 @@ FactoryGirl.define do
   factory :wiki do
     title "My Public Wiki"
     body "Some content"
-    
 
     trait :as_private do
       title "My Private Wiki"

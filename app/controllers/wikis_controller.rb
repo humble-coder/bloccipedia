@@ -10,7 +10,7 @@ class WikisController < ApplicationController
     @current_collaborators = @wiki.users
     if current_user
       @new_collaborators = User.where("id != (?)", current_user.id) 
-      @new_collaborators = @new_collaborators.select { |collaborator| !@wiki.users.include?(collaborator) }
+      @new_collaborators.select! { |collaborator| !@wiki.users.include?(collaborator) }
     end
     authorize @wiki
   end

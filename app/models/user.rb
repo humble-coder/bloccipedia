@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
     self.wikis.include?(wiki) && self.premium
   end
 
+  def self.search(search)
+    where('name LIKE ?', "%#{search}%")
+  end
+
   private
   
   def set_user

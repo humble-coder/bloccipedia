@@ -14,7 +14,7 @@ feature 'A premium member adds collaborator to own wiki' do
   scenario 'Successfully' do
     click_link 'View Wikis'
     click_link 'My Private Wiki'
-    click_link 'Add markb'
+    click_link 'Add'
 
   	expect(page).to have_content('Collaborator markb Added')
   end
