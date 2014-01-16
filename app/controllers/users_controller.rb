@@ -1,10 +1,5 @@
 class UsersController < ApplicationController
 
-  def index
-    @wiki = Wiki.find(params[:wiki_id])
-    @user = User.search(params[:search])
-  end
-
   def update
   	@wiki = Wiki.find(params[:wiki_id])
   	@user = User.find(params[:id])
