@@ -3,6 +3,7 @@ class Wiki < ActiveRecord::Base
   attr_accessible :body, :title, :public, :user_ids
   validates :title, presence: true
   validates :body, presence: true
+  before_create :set_public_attribute
 
   default_scope order('created_at DESC')
 
@@ -11,6 +12,12 @@ class Wiki < ActiveRecord::Base
 
   def should_generate_new_friendly_id?
     new_record?
+  end
+
+  private
+
+  def set_public_attribute
+    self.public = true if self.public.nil?
   end
 
 end

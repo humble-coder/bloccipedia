@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   after_create :set_user
 
+  def is_wiki_owner?(wiki)
+    self.wikis.include?(wiki) && self.premium
+  end
+
   private
   
   def set_user

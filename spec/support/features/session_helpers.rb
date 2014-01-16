@@ -10,7 +10,7 @@ module Features
       click_button 'Sign up'
     end
 
-    def free_user_signs_in(email = true, password = true, wrong_password = false, bad_email = false)
+    def member_user_signs_in(email = true, password = true, wrong_password = false, bad_email = false)
       user = create(:user)
       visit new_user_session_path
       fill_in 'Email', with: user.email if email
@@ -66,11 +66,11 @@ module Features
     end
 
     def make_private_wiki(collaborator = nil)
-      visit new_wiki_path
+      click_link 'Create a Wiki'
       fill_in 'Title', with: 'My Private Wiki'
       fill_in 'Body', with: 'Some private content'
       uncheck 'wiki_public'
-      select collaborator, from: "wiki[user_ids]" if collaborator
+      select collaborator.name, from: "wiki[user_ids]" if collaborator
       click_button 'Make Wiki'
     end
 

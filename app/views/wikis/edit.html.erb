@@ -2,22 +2,27 @@
 
 <% if current_user %>
   <%= form_for @wiki do |f| %>
+
+    <% if @wiki.errors.any? %>
+      <ul>
+      <% @wiki.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    <% end %>
+
     <%= f.label :title %>
     <%= f.text_field :title %>
 
     <%= f.label :body %>
-    <div id="epiceditor">
-      <%= f.text_area :body %>
-    </div>
+    <%= f.text_area :body %>
 
     <% if current_user.premium && current_user.wikis.include?(@wiki) %>
       <%= f.label 'Make Public' %>
       <%= f.check_box :public, { checked: true }, 1, 0 %>
-      <%= f.label 'Add Collaborators' %>
-      <%= f.collection_select(:user_ids, User.all, :id, :name, { prompt: true, multiple: true }) %>
-    <% else %>
-      <% @wiki.public = true %>
     <% end %>
     <%= f.submit 'Update Wiki' %>
   <% end %>
+<% else %>
+  <p> You must be signed in to edit a wiki. </p>
 <% end %>
