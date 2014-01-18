@@ -46,6 +46,7 @@ gem 'pundit'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'friendly_id'
 gem 'simple_form', '2.1.0'
+gem "codeclimate-test-reporter", group: :test, require: nil
 
 
 

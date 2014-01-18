@@ -50,6 +50,8 @@ GEM
       xpath (~> 2.0)
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
+    codeclimate-test-reporter (0.2.0)
+      simplecov (>= 0.7.1, < 1.0.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -76,6 +78,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    docile (1.1.2)
     erubis (2.7.0)
     execjs (2.0.2)
     factory_girl (4.3.0)
@@ -167,6 +170,11 @@ GEM
     simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    simplecov (0.8.2)
+      docile (~> 1.1.0)
+      multi_json
+      simplecov-html (~> 0.8.0)
+    simplecov-html (0.8.0)
     skeleton-rails (0.1.0)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -196,6 +204,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
+  codeclimate-test-reporter
   coffee-rails (~> 3.2.1)
   cucumber-rails
   database_cleaner
