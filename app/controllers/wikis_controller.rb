@@ -10,7 +10,7 @@ class WikisController < ApplicationController
     @current_collaborators = @wiki.users
     if current_user
         @new_collaborators = User.search(params[:search])
-        @new_collaborators.select! { |collaborator| !@wiki.users.include?(collaborator) }
+        @new_collaborators.select! { |collaborator| !@wiki.users.include?(collaborator) } if @new_collaborators
     end
     authorize @wiki
   end
