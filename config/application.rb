@@ -65,6 +65,7 @@ module Bloccipedia
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    # For security purposes
     config.before_configuration do
         env_file = File.join(Rails.root, 'config', 'local_env.yml')
         YAML.load(File.open(env_file)).each do |key, value|
