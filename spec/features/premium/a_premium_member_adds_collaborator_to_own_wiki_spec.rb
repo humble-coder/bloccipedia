@@ -7,6 +7,8 @@ feature 'A premium member adds collaborator to own wiki' do
   	premium_user = create(:user, :as_premium_user)
   	premium_user.wikis << private_wiki
     collaborator = create(:user)
+    other_collaborator = create(:user, :as_second_collaborator)
+    private_wiki.users << other_collaborator
     visit root_path
     login_as(premium_user, scope: :user)
   end
@@ -19,5 +21,15 @@ feature 'A premium member adds collaborator to own wiki' do
     click_link 'Add'
 
   	expect(page).to have_content('Collaborator markb Added')
+  end
+
+  scenario 'when the collaborator is already added' do
+    click_link 'View Wikis'
+    click_link 'My Private Wiki'
+    fill_in 'search', with: 'carlb'
+    click_button 'Search'
+    click_link 'Add'
+
+    expect(page).to have_content('Collaborator carlb already included.')
   end
 end

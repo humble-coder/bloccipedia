@@ -12,5 +12,10 @@ FactoryGirl.define do
       premium true
       email "premium_user@example.com"
     end
+
+    trait :as_second_collaborator do
+      name "carlb"
+      email "carl@example.com"
+    end
   end
 end

@@ -1,18 +1,24 @@
 class UsersController < ApplicationController
+  #respond_to :html, :js
 
   def update
   	@wiki = Wiki.find(params[:wiki_id])
   	@user = User.find(params[:id])
-  	@wiki.users << @user
     name = @user.name
 
-  	if @wiki.users.include?(@user)
-  		flash[:notice] = "Collaborator #{name} Added"
-  		redirect_to @wiki
-  	else
-  		flash[:error] = "Collaborator #{name} Not Added - Please Try Again"
-  		redirect_to @wiki
-  	end
+    if @wiki.users.include?(@user)
+      flash[:error] = "Collaborator #{name} already included."
+      redirect_to @wiki
+    else
+      @wiki.users << @user
+      if @wiki.users.include?(@user)
+        flash[:notice] = "Collaborator #{name} Added"
+        redirect_to @wiki
+      else
+        flash[:error] = "Collaborator #{name} Not Added - Please Try Again"
+        redirect_to @wiki
+      end
+    end
   end
 
   def destroy
@@ -26,6 +32,7 @@ class UsersController < ApplicationController
     	redirect_to @wiki
     else
     	flash[:error] = "Collaborator #{name} Not Removed - Please Try Again"
+      redirect_to @wiki
     end
   end
 

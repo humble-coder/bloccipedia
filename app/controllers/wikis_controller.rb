@@ -1,4 +1,5 @@
 class WikisController < ApplicationController
+  #respond_to :html, :js
   before_filter :authenticate_user!, except: [:index, :show]
   
   def index
@@ -8,10 +9,7 @@ class WikisController < ApplicationController
   def show
     @wiki = Wiki.find(params[:id])
     @current_collaborators = @wiki.users
-    if current_user
-        @new_collaborators = User.search(params[:search])
-        @new_collaborators.select! { |collaborator| !@wiki.users.include?(collaborator) } if @new_collaborators
-    end
+    @new_collaborators = User.search(params[:search])
     authorize @wiki
   end
 
