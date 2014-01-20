@@ -21,7 +21,6 @@ feature 'A premium member makes a private wiki' do
 
   scenario 'Successfully with a collaborator' do
     collaborator = create(:user)
-    visit new_wiki_path # to reload page so that collaborator, a user, shows up as a collaborator to add.
     fill_in 'Title', with: 'My Private Wiki'
     fill_in 'Body', with: 'Some private content'
     click_button 'Make Wiki'
