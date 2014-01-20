@@ -1,5 +1,4 @@
 class WikisController < ApplicationController
-  #respond_to :html, :js
   before_filter :authenticate_user!, except: [:index, :show]
   
   def index

@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   
   def set_user
     self.premium = false
+    self.save
   end
 
 end

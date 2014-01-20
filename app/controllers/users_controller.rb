@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  #respond_to :html, :js
 
   def update
   	@wiki = Wiki.find(params[:wiki_id])
