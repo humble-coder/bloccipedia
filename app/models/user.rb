@@ -22,10 +22,9 @@ class User < ActiveRecord::Base
   end  
 
   private
-  
+
   def set_user
     self.premium = false
-    self.save
   end
 
 end
