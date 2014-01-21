@@ -6,7 +6,6 @@ FactoryGirl.define do
     email "valid@example.com"
     password "password"
     confirmed_at Time.now
-    premium false
 
     trait :as_premium_user do
       name "johnb"
@@ -17,7 +16,6 @@ FactoryGirl.define do
     trait :as_second_collaborator do
       name "carlb"
       email "carl@example.com"
-      premium false
     end
   end
 end
