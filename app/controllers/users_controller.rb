@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  respond_to :html, :js
 
   def update
   	@wiki = Wiki.find(params[:wiki_id])
@@ -7,16 +8,17 @@ class UsersController < ApplicationController
 
     if @wiki.users.include?(@user)
       flash[:error] = "Collaborator #{name} already included."
-      redirect_to @wiki
     else
       @wiki.users << @user
       if @wiki.users.include?(@user)
         flash[:notice] = "Collaborator #{name} Added"
-        redirect_to @wiki
       else
         flash[:error] = "Collaborator #{name} Not Added - Please Try Again"
-        redirect_to @wiki
       end
+    end
+
+    respond_with(@wiki, @user) do |f|
+      f.html { redirect_to @wiki }
     end
   end
 
@@ -28,10 +30,14 @@ class UsersController < ApplicationController
 
     if !@wiki.users.include?(@user)
     	flash[:notice] = "Collaborator #{name} Removed"
-    	redirect_to @wiki
+    	#redirect_to @wiki
     else
     	flash[:error] = "Collaborator #{name} Not Removed - Please Try Again"
-      redirect_to @wiki
+      #redirect_to @wiki
+    end
+
+    respond_with(@wiki, @user) do |f|
+      f.html { redirect_to @wiki }
     end
   end
 

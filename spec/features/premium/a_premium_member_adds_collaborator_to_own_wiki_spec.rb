@@ -23,13 +23,4 @@ feature 'A premium member adds collaborator to own wiki' do
   	expect(page).to have_content('Collaborator markb Added')
   end
 
-  scenario 'when the collaborator is already added' do
-    click_link 'View Wikis'
-    click_link 'My Private Wiki'
-    fill_in 'search', with: 'carlb'
-    click_button 'Search'
-    click_link 'Add'
-
-    expect(page).to have_content('Collaborator carlb already included.')
-  end
 end

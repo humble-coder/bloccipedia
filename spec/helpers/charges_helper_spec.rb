@@ -11,5 +11,5 @@ require 'spec_helper'
 #   end
 # end
 describe ChargesHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  pending "This will have tests when there are methods in the ChargesHelper module"
 end

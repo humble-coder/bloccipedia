@@ -1,0 +1,10 @@
+<% @new_collaborators.each do |collaborator| %>
+  <% if !wiki.users.include?(collaborator) %>
+    <%= content_tag :div, id: "collaborator-#{collaborator.id}" do %>
+      <p>
+        <%= collaborator.name %>
+        <%= link_to "Add", wiki_user_path(wiki, collaborator), method: :put, remote: true, class: "button" %>
+      </p>
+    <% end %>
+  <% end %>
+<% end %>

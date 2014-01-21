@@ -1,0 +1,6 @@
+<% if !@wiki.users.include?(@user) %>
+  $('#current-collaborator-' + <%= @user.id %>).hide();
+  location.reload();
+<% else %>
+  $('#current-collaborator-' + <%= @user.id %>).prepend("<div><%= flash[:error] %></div>");
+<% end %>

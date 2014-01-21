@@ -9,7 +9,6 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :wikis
   # attr_accessible :title, :body
   validates :name, presence: true
-  after_create :set_user
 
   def is_wiki_owner?(wiki)
     self.wikis.include?(wiki) && self.premium
@@ -19,12 +18,6 @@ class User < ActiveRecord::Base
     if search  
       where('name LIKE ?', "%#{search}%")
     end
-  end  
-
-  private
-
-  def set_user
-    self.premium = false
   end
 
 end

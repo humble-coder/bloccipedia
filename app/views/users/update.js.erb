@@ -1,0 +1,7 @@
+<% if @wiki.users.include?(@user) %>
+  $('#collaborator-' + <%= @user.id %>).hide();
+  $('.js-current-collaborators').html("<%= escape_javascript(render partial: 'users/show_current_collaborators', locals: { current_collaborators: @wiki.users, wiki: @wiki, current_user: current_user }) %>");
+  location.reload();
+<% else %>
+  $('#collaborator-' + <%= @user.id %>).prepend("<div><%= flash[:error] %></div>");
+<% end %>

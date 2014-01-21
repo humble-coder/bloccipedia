@@ -1,0 +1,10 @@
+<% current_collaborators.each do |collaborator| %>
+  <%= content_tag :div, id: "current-collaborator-#{collaborator.id}" do %>
+    <p>
+      <%= collaborator.name %>
+      <% if current_user.is_wiki_owner?(wiki) && current_user != collaborator %>
+        <%= link_to "Remove", wiki_user_path(@wiki, collaborator), method: :delete, remote: true, class: "button" %>
+      <% end %>
+    </p>
+  <% end %>
+<% end %>

@@ -10,14 +10,9 @@
     <%= link_to "Delete Wiki", wiki_path(@wiki), method: :delete, class: "button" %>
   <% end %>
   <h4>Current Collaborators</h4>
-  <% @current_collaborators.each do |collaborator| %>
-    <p> 
-      <%= collaborator.name %>
-      <% if current_user.is_wiki_owner?(@wiki) && current_user != collaborator %>
-        <%= link_to "Remove", wiki_user_path(@wiki, collaborator), method: :delete, class: "button" %>
-      <% end %>
-    </p>
-  <% end %>
+  <div class=".js-current-collaborators">
+    <%= render partial: "users/show_current_collaborators", locals: { current_collaborators: @current_collaborators, wiki: @wiki, current_user: current_user } %>
+  </div>
   <% if current_user.is_wiki_owner?(@wiki) %>
     <h4>Search for and Add More Collaborators</h4>
     <%= form_tag wiki_path(@wiki), method: :get do %>
@@ -26,13 +21,10 @@
         <%= submit_tag "Search", name: nil %>
       </p>
     <% end %>
-    <% if @new_collaborators %>
-      <% @new_collaborators.each do |collaborator| %>
-        <p>
-          <%= collaborator.name %>
-          <%= link_to "Add", wiki_user_path(@wiki, collaborator), method: :put, class: "button" %>
-        </p>
+    <div class="js-new-collaborators">
+      <% if @new_collaborators %>
+        <%= render partial: "users/update_collaborators", locals: { new_collaborators: @new_collaborators, wiki: @wiki } %>
       <% end %>
-    <% end %>
+    </div>
   <% end %>
 <% end %>

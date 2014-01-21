@@ -26,11 +26,8 @@ rand(20..30).times do
     password: password, 
     password_confirmation: password)
   u.skip_confirmation!
+  u.update_attribute('premium', true) if rand >= 0.7
   u.save
-  if rand >= 0.7
-    u.update_attribute('premium', true)
-    u.save
-  end
 end
 
  wikis.length.times do
