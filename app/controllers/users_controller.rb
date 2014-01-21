@@ -6,15 +6,9 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
     name = @user.name
 
+    @wiki.users << @user if !@wiki.users.include?(@user)
     if @wiki.users.include?(@user)
-      flash[:error] = "Collaborator #{name} already included."
-    else
-      @wiki.users << @user
-      if @wiki.users.include?(@user)
-        flash[:notice] = "Collaborator #{name} Added"
-      else
-        flash[:error] = "Collaborator #{name} Not Added - Please Try Again"
-      end
+      flash[:notice] = "Collaborator #{name} Added"
     end
 
     respond_with(@wiki, @user) do |f|
@@ -30,10 +24,6 @@ class UsersController < ApplicationController
 
     if !@wiki.users.include?(@user)
     	flash[:notice] = "Collaborator #{name} Removed"
-    	#redirect_to @wiki
-    else
-    	flash[:error] = "Collaborator #{name} Not Removed - Please Try Again"
-      #redirect_to @wiki
     end
 
     respond_with(@wiki, @user) do |f|

@@ -1,5 +1,4 @@
 class WikisController < ApplicationController
-  respond_to :html, :js
   before_filter :authenticate_user!, except: [:index, :show]
   
   def index
@@ -11,8 +10,6 @@ class WikisController < ApplicationController
     @current_collaborators = @wiki.users
     @new_collaborators = User.search(params[:search])
     authorize @wiki
-
-    respond_with(@wiki, @new_collaborators)
   end
 
   def new
@@ -46,9 +43,6 @@ class WikisController < ApplicationController
     if @wiki.update_attributes(params[:wiki])
       flash[:notice] = "Wiki was updated."
       redirect_to @wiki
-    else
-      flash[:error] = "There was an error saving your wiki. Please try again."
-      render :edit
     end
   end
 
@@ -60,9 +54,6 @@ class WikisController < ApplicationController
     if @wiki.destroy
       flash[:notice] = "'#{title}' was deleted successfully."
       redirect_to wikis_path
-    else
-      flash[:error] = "There was an error deleting the wiki."
-      render :show
     end
   end
 end

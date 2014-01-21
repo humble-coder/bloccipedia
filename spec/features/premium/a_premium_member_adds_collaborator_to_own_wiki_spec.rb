@@ -22,5 +22,4 @@ feature 'A premium member adds collaborator to own wiki' do
 
   	expect(page).to have_content('Collaborator markb Added')
   end
-
 end
