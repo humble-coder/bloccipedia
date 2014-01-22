@@ -14,9 +14,7 @@ feature 'Users viewing wiki list containing private wiki' do
   end
 
   scenario 'premium user with a private wiki views the wiki list for his/her own private wiki' do
-    user = create(:user, :as_premium_user)
-    wiki = create(:wiki, :as_private)
-    wiki.users << user
+    user = create(:user, :as_premium_user, :with_private_wiki)
     login_as(user, scope: :user)
     click_link 'View Wikis'
 
@@ -33,9 +31,8 @@ feature 'Users viewing wiki list containing private wiki' do
   end
 
   scenario 'member user with access to private wiki views the wiki list' do
-    user = create(:user)
-    wiki = create(:wiki, :as_private)
-    wiki.users << user
+    wiki = create(:wiki, :as_private, :with_collaborator)
+    user = wiki.users.first
     login_as(user, scope: :user)
     click_link 'View Wikis'
 

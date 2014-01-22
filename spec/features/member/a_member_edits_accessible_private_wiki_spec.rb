@@ -1,26 +1,46 @@
 require 'spec_helper'
 
 feature 'A member edits accessible private wiki' do
+
+  let(:private_wiki) { create :wiki, :as_private, :with_collaborator }
+  let(:collaborator) { private_wiki.users.first }
   
   before(:each) do
-    member_user = create(:user)
-    premium_user = create(:user, :as_premium_user)
-    private_wiki = create(:wiki, :as_private)
-    private_wiki.users << premium_user
-    premium_user.wikis << private_wiki
-    private_wiki.users << member_user
-    login_as(member_user, scope: :user)
+    login_as(collaborator, scope: :user)
     visit root_path
-  end
-
-  scenario 'Successfully' do
     click_link 'View Wikis'
     click_link 'My Private Wiki'
     click_link 'Edit Wiki'
+  end
+
+  scenario 'Successfully' do
+    fill_in 'Body', with: 'updated body'
+    click_button 'Update Wiki'
+    
+    expect(page).to have_content('updated body')
+    expect(page).to have_content('Wiki was updated.')
+  end
+
+  scenario 'with missing title' do
+    fill_in 'Title', with: ''
     fill_in 'Body', with: 'updated body'
     click_button 'Update Wiki'
 
-    expect(page).to have_content('updated body')
-    expect(page).to have_content('Wiki was updated.')
+    expect(page).to have_content('There was an error updating the wiki. Please try again.')
+  end
+
+  scenario 'with missing body' do
+    fill_in 'Body', with: ''
+    click_button 'Update Wiki'
+
+    expect(page).to have_content('There was an error updating the wiki. Please try again.')
+  end
+
+  scenario 'with missing title and body' do
+    fill_in 'Title', with: ''
+    fill_in 'Body', with: ''
+    click_button 'Update Wiki'
+
+    expect(page).to have_content('There was an error updating the wiki. Please try again.')
   end
 end

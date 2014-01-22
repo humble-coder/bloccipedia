@@ -17,5 +17,21 @@ FactoryGirl.define do
       name "carlb"
       email "carl@example.com"
     end
+
+    trait :with_public_wiki do
+      wikis {
+        1.times.map do
+          FactoryGirl.create(:wiki)
+        end
+      }
+    end
+
+    trait :with_private_wiki do
+      wikis {
+        1.times.map do
+          FactoryGirl.create(:wiki, :as_private)
+        end
+      }
+    end
   end
 end

@@ -1,8 +1,10 @@
 require 'spec_helper'
 
 feature 'A member signs out' do
+  
+  let(:user) { create :user }
+
   scenario 'Successfully' do
-    user = create(:user)
     login_as(user, scope: :user)
     visit root_path
     click_link 'Sign out'

@@ -1,9 +1,10 @@
 require 'spec_helper'
 
 feature 'A member upgrades to premium', js: true do
+  
+  let(:user) { create :user }
 
   before(:each) do
-    user = create(:user)
     login_as(user, scope: :user)
     visit root_path
   end
