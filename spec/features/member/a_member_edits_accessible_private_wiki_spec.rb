@@ -16,7 +16,7 @@ feature 'A member edits accessible private wiki' do
   scenario 'Successfully' do
     fill_in 'Body', with: 'updated body'
     click_button 'Update Wiki'
-    
+
     expect(page).to have_content('updated body')
     expect(page).to have_content('Wiki was updated.')
   end

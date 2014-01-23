@@ -11,19 +11,11 @@ FactoryGirl.define do
     end
 
     trait :with_collaborator do
-      users { 
-      	1.times.map do 
-      	  FactoryGirl.create(:user)
-      	end
-      }
+      users { |wiki_user| [wiki_user.association(:user)] }
     end
 
     trait :with_premium_user do
-      users {
-        1.times.map do
-          FactoryGirl.create(:user, :as_premium_user)
-        end
-      }
+      users { |wiki_user| [wiki_user.association(:user, :as_premium_user)] }
     end
   end
 end
