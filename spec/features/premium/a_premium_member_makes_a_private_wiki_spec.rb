@@ -2,9 +2,11 @@ require 'spec_helper'
 
 feature 'A premium member makes a private wiki' do
 
+  let(:premium_user) { create :user, :as_premium_user }
+  let(:collaborator) { create :user }
+
   before(:each) do
-    user = create(:user, :as_premium_user)
-    login_as(user, scope: :user)
+    login_as(premium_user, scope: :user)
     visit root_path
     click_link 'Create a Wiki'
   end
@@ -20,11 +22,10 @@ feature 'A premium member makes a private wiki' do
   end
 
   scenario 'Successfully with a collaborator' do
-    collaborator = create(:user)
     fill_in 'Title', with: 'My Private Wiki'
     fill_in 'Body', with: 'Some private content'
     click_button 'Make Wiki'
-    fill_in 'search', with: 'markb'
+    fill_in 'search', with: collaborator.name
     click_button 'Search'
     click_link 'Add'
 

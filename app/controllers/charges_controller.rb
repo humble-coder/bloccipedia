@@ -23,6 +23,7 @@ class ChargesController < ApplicationController
     current_user.update_attribute(:premium, true)
 
   rescue Stripe::CardError => e
+    binding.pry
     logger.info e.message
     flash[:error] = e.message
     redirect_to charges_path

@@ -9,5 +9,13 @@ FactoryGirl.define do
       title "My Private Wiki"
       public false
     end
+
+    trait :with_collaborator do
+      users { |wiki_user| [wiki_user.association(:user)] }
+    end
+
+    trait :with_premium_user do
+      users { |wiki_user| [wiki_user.association(:user, :as_premium_user)] }
+    end
   end
 end

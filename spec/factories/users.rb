@@ -13,9 +13,17 @@ FactoryGirl.define do
       email "premium_user@example.com"
     end
 
-    trait :as_second_collaborator do
-      name "carlb"
-      email "carl@example.com"
+    trait :with_public_wiki do
+      wikis { |user_wiki| [user_wiki.association(:wiki)] } 
     end
+
+    trait :with_private_wiki do
+      wikis { |user_wiki| [user_wiki.association(:wiki, :as_private)] }
+    end
+
+    trait :with_private_wiki_with_collaborator do
+      wikis { |user_wiki| [user_wiki.association(:wiki, :as_private, :with_collaborator)] }
+    end
+
   end
 end
